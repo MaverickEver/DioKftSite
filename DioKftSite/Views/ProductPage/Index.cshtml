@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<style type="text/css">
+    #productPage .headerImage {
+        width: 100%;
+        height: 20%;
+    }
+
+    #productPage .form-control {
+        background-color: #125027;
+        color: white;
+        margin: 25px auto 25px auto;
+        border-radius: 0;
+    }
+</style>
+<div id="productPage">
+    <div class="row">
+        <img class="headerImage" src="~/Content/Images/product-header.png" />
+    </div>
+    @*<div class="row">
+        @using (Html.BeginForm("Search", "Product", FormMethod.Post))
+        {
+            @Html.DropDownListFor(m => m.SelectedCategoryId, Model.Categories, "Category", new { @class = "form-control", onchange = "this.form.submit();" })
+        }
+    </div>
+
+    @Html.Partial("_ProductTable", Model.Products)*@
+</div>
+

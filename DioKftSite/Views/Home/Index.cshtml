@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<style type="text/css">
+    #aboutPage {
+        padding-top: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #aboutPage .introduction {
+        background-color:white;
+    }
+
+    #aboutPage img.logo {
+        width: 352px;
+        height: 392px;
+    }
+
+        #aboutPage img.sample {
+            width: 512px;
+            height: 287px;
+            padding-top: 25px;
+        }
+
+        #aboutPage .header-black {
+            color: #1e1e1e;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15pt;
+            padding-bottom: 25px;
+            padding-top: 25px;
+        }
+
+        #aboutPage .content-black {
+            color: #1e1e1e;
+            text-align: center;
+            text-indent: 50px;
+            padding-bottom:25px;
+        }
+
+        #aboutPage .header-green {
+            color: #125027;
+            font-size: 15pt;
+            padding-bottom: 25px;
+            padding-top: 25px;
+        }
+
+        #aboutPage .content-green {
+            color: #125027;
+            text-indent: 50px;
+            padding-bottom: 25px;
+        }
+
+
+        #aboutPage .button-container {
+            position:relative;
+            width:100%;
+            height:100px;
+        }
+
+        #aboutPage button {
+            text-transform: uppercase;
+            background-color: #125027;
+            color: white;
+            border-radius: 15px;
+            border: none;
+            height: 60px;
+            width: 35%;
+            font-size: 13pt;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%)
+        }
+
+        #aboutPage .services {
+            background: url(@Href("~/Content/Images/background.jpg"));
+            padding-top: 25px;
+        }
+
+        #aboutPage .services img {
+            margin: auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        #aboutPage .services .content {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 25px;
+            padding-top: 10px;
+        }
+
+</style>
+
+<div id="aboutPage">
+    @Html.Partial("_Slider")
+    <div class="introduction">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header-black">
+                    Üdvözöljük a Dió 896 Kft. honlapján!
+                </div>
+                <div class="content-black">
+                    Cégünk vegyi anyagok, műtrágyák, növényvédő szerek széles választékát kínálja.
+                    Szaktanácsadók és növényorvosok segítik partnereink munkáját.
+                    Gyors, udvarias kiszolgálással, saját gépjármű parkkal történő kiszállítással, kívánságra minőségi betárolással állunk az Önök rendelkezésére.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="header-green">
+                    SOKOLDALÚ PARTNER A MEZŐGAZDASÁGBAN!
+                </div>
+                <div class="content-green">
+                    A mezőgazdaságban felhasznált input anyagok minősége és bekerülési költsége alapvetően meghatározza a termelés gazdaságosságát. Így alapvető kérdés, hogy megbízható, stabil partnerrel rendelkezzünk ezen a téren. A Dió 896 Kft. hazai és európai gyártók műtrágyáit, növényvédő szereit, vetőmagjait forgalmazza, valamint vegyi anyag kis és nagykereskedelmével foglalkozik közel 20 éve Magyarországon. A megalapítástól kezdve 100%-ban magyar magántulajdonban lévő cég Hódmezővásárhelyen található meg.
+                </div>
+                <div class="content-green">
+                    A cégtörténet egészen 1996-ig nyúlik vissza a cég megalapításáig. Ekkor még csak vegyi anyagokat kínáltak az ipar, a mezőgazdaság és a szolgáltató ipar minden területére. Ez az üzletág a mai napig megtalálható a cég tevékenységei között. Ennek köszönhetően partnereink között szerepelnek élelmiszeripari-, mezőgazdasági üzemek, az ipari vállalatok széles körébe tartozó gyártók, valamint a szolgáltató iparba tartozó fürdők is.
+                </div>
+                <div class="content-green">
+                    2008-tól megkezdődött a termékpaletta átalakítása, így a kertészeti és szántóföldi műtrágyák mellett a növényvédő szerek is felkerültek a forgalmazott termékek listájára. A kertészeti műtrágyák magukba foglalják a mono-műtrágyákat valamint a mikroelemeket is vízoldható formában. Az elmúlt pár évben a vetőmag is beszerezhetővé vált így már teljes lett a mezőgazdasági input anyag kereskedelem.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img class="logo img-responsive" src="~/Content/Images/dio_logo.png" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="sample img-responsive" src="~/Content/Images/about.jpg" />
+            </div>
+            <div class="col-md-8">
+                <div class="content-green">
+                    Saját gyártású termékekkel is képviseljük magunkat a hazai piacon, úgy mint Dio-Mix vízoldható NPK különböző összetételekben a kertészek számára és a Dio-Vin magas szerves anyag tartalmú levéltrágya kertészeti és szántóföldi felhasználásra. A versenyképesség megőrzésének érdekében saját gépparkkal rendelkezünk a rugalmas kiszállítás érdekében, amelyben megtalálható hat darab 24 tonna teherbírású kamion, a kisebb partnerek részére egy 5,5 illetve egy 1,5 tonnás teherautó, amelyekkel az ország bármely pontjára képesek szállítani. A hódmezővásárhelyi telephelyen több mint 10.000m 2 fedett, zárt tárolóval rendelkezik a cég, amely kulcsfontosságú a műtrágyák minőségének megőrzéséhez. Szükségesetén a partnereink számára a tárolási lehetőséget ezen a helyen tudjuk biztosítani. Egy másik nagyon fontos szolgáltatás a szaktanácsadás mind a tápanyag utánpótlás, mind a növény védőszerek felhasználásával kapcsolatban. A cégnél több szakember és növényorvos is rendelkezésre áll. Fontosnak tartjuk és kiemelten kezeljük a kereskedelem mellett a partnerekkel való közös együttműködést, gondolkozást és munkát, hiszen a partnereink sikerei határozzák meg a céget is. A cég jelenét és múltját ezek az események határozták meg, a jövőjét pedig az a terménytisztító- és szárító telephely, amely 2016-ban került átadásra Hódmezővásárhelyen, így ennek köszönhetően a terménykereskedelem is fel tud élénkülni és a partnereink részére teljes termeltetési konstrukciót tudunk biztosítani.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="button-container">
+                    <button>Ajánlat kéréshez kattintson ide</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="services">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-responsive img-circle" src="~/Content/Images/about.jpg" />
+                <div class="content">services</div>
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive img-circle" src="~/Content/Images/about.jpg" />
+                <div class="content">services</div>
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive img-circle" src="~/Content/Images/about.jpg" />
+                <div class="content">services</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-responsive img-circle" src="~/Content/Images/about.jpg" />
+                <div class="content">services</div>
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive img-circle" src="~/Content/Images/about.jpg" />
+                <div class="content">services</div>
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive img-circle" src="~/Content/Images/about.jpg" />
+                <div class="content">services</div>
+            </div>
+        </div>
+    </div>
+</div>

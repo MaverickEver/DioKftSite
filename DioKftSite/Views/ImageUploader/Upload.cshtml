@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+<form>
+    <span>Select image to upload: </span>
+
+    <input id="fileBrowser" type="file"/>
+    <input id="buttonUpload" type="button" value="Upload" />
+    <span id="resultSpan"></span>
+</form>
+
+<script type="text/javascript">
+
+    function upload() {
+        var file = $('#fileBrowser')[0].files[0]
+
+        if (file !== undefined && window.FormData !== undefined) {
+
+            var data = new FormData();
+            data.append("file", file);
+
+            $.ajax({
+                type: "POST",
+                url: '/ImageUploader/UploadAsync',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (result) {
+                    if (result.includes("Failed")) {
+
+                    }
+                    else {
+                        $('#resultSpan').html(result);
+                    }
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).Message;
+
+                    $('#resultSpan').html(result);
+                }
+            });
+        } else {
+            alert("An error has been ocurred during the uploading!");
+        }
+    }
+
+    $(function () {
+        $('#buttonUpload').on("click", upload);
+    });
+</script>
+

@@ -1,0 +1,143 @@
+﻿@{
+    var name = (string)Session[DioKftSite.Helpers.SessionItems.UserName.ToString()];
+    var id = (string)Session[DioKftSite.Helpers.SessionItems.UserId.ToString()];
+
+    var authenticated = !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(id);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIO 896 KFT.</title>
+    @Styles.Render("~/Content/site-css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            var url = window.location.pathname;
+            $('.nav a[href="' + url + '"]').parent().addClass('selected');
+        });
+    </script>
+
+    <style type="text/css">
+        .navbar {
+            background: url(@Href("~/Content/Images/background.jpg"));
+        }
+
+        .navbar-nav{
+            padding-top: 25px;
+            padding-left: 15px;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color:#125027;
+            padding-left:10px;
+            padding-right:10px;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover{
+            color:#e6e6e6;
+        }
+
+        .navbar-default .navbar-nav > li > a:after{
+            content:'';
+            border-right: 1px solid #125027;
+            margin-top:15px;
+            margin-left:20px;
+         }
+
+        .navbar-default .navbar-nav > li:last-child > a:after{
+            border: none;
+            margin: 0;
+        }
+
+        .navbar-brand{
+            padding: 0;
+        }
+
+        .nav-item.selected a:after{
+            content:'';
+            color:#e6e6e6;
+            border-bottom: 1px solid #125027;
+        }
+
+        .nav-item.selected a{
+            text-decoration: underline;
+        }
+
+        .container.body-content{
+            position:relative;
+            top:49px;
+        }
+    </style>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href=".">
+                    <img src="~/Content/Images/dio_logo_felirat.png" />
+                    <img src="~/Content/Images/dio_logo.png" />
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">@Html.ActionLink("About", "Index", "Home")</li>
+                    @*<li class="nav-item"><a>Services</a></li>*@
+                    <li class="nav-item">@Html.ActionLink("Products", "Index", "ProductPage")</li>
+                    <li class="nav-item">@Html.ActionLink("News", "Index", "NewsPage")</li>
+                    <li class="nav-item">@Html.ActionLink("Gallery", "Index", "GalleryPage")</li>                    
+                    <li class="nav-item"> @Html.ActionLink("Contact", "Index", "ContactPage")</li>
+                    @if (authenticated)
+                    {
+                        <li class="nav-item"> @Html.ActionLink("Admin", "Admin", "Home")</li>
+                    }
+                </ul>
+
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav ">
+                        <li>
+                            @if (!authenticated)
+                            {
+                                <a href="@Url.Action("Index", "Login")" class="btn">
+                                    Login
+                                    <span class="glyphicon glyphicon-log-in"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Logout", "Login")" class="btn">
+                                    Logout
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - DIÓ 896 Kft.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

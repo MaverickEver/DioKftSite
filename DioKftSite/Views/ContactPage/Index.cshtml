@@ -1,0 +1,145 @@
+﻿@model DioKftSite.Models.ViewModels.ContactViewModel
+
+
+<style type="text/css">
+    #contactPage {
+        color: #125027;
+    }
+
+        #contactPage .headerImage {
+            width: 100%;
+            height: 20%;
+        }
+
+        #contactPage h3 {
+            text-transform: uppercase;
+        }
+
+        #contactPage h4 {
+            text-align: center;
+        }
+
+        #contactPage #map {
+            width: 100%;
+            height: 292px;
+            background-color: grey;
+        }
+
+        #contactPage #inputMessage {
+            width: 100%;
+            height: 100%;
+            max-width: 400px !important;
+            border: 0;
+            background-color: #e6e6e6;
+            padding: 6px;
+        }
+
+        #contactPage input.email-field {
+            margin-bottom: 15px;
+            border: 0;
+            background-color: #e6e6e6;
+            width: 100%;
+            line-height: 2em;
+            padding: 6px;
+        }
+
+        #contactPage button {
+            text-transform: uppercase;
+            background-color: #125027;
+            font-size: 13pt;
+            color: white;
+            border-radius: 0;
+            border: none;
+            line-height: 2em;
+            width: 50%;
+            text-decoration: underline;
+            margin-top: 25px;
+        }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: #464646;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #464646;
+        opacity: 1;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #464646;
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #464646;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #464646;
+    }
+
+    #contactPage .contact-details {
+        padding: 50px 0 25px 0;
+        color: #464646;
+    }
+
+        #contactPage .contact-details div {
+            width: 100%;
+            text-align: center;
+        }
+
+    #contactPage #contactList {
+        margin: 25px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtk6igeDdbmdY2sKvkPJEhcvQLiTjQ_bY&callback=initMap"  async="" defer=""></script>
+<script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 46.406782, lng: 20.362610 },
+            zoom: 15
+        });
+    }
+</script>
+
+<div id="contactPage">
+    <div class="row">
+        <img class="headerImage" src="~/Content/Images/contact-header.jpg" />
+    </div>
+
+    @using (Html.BeginForm("SendEmail", "Contact", FormMethod.Post))
+    {
+        <div class="row">
+            <h3>Ajánlatkérés / Kapcsolat / Rendelés</h3>
+
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Email.Name, new { @type = "text", @class = "email-field", @id = "inputName", @placeholder = "Enter name" })
+                @Html.TextBoxFor(m => m.Email.CompanyName, new { @type = "text", @class = "email-field", @id = "inputCompanyName", @placeholder = "Company Name" })
+                @Html.TextBoxFor(m => m.Email.EmailAddress, new { @type = "email", @class = "email-field", @id = "inputEmailAdress", @placeholder = "E-mail adress" })
+                @Html.TextBoxFor(m => m.Email.PhoneNumber, new { @type = "tel", @class = "email-field", @id = "inputPhoneNumber", @placeholder = "Phone number" })
+                <button type="submit" class="btn">Send</button>
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextAreaFor(m => m.Email.Message, 14, 55, new { @type = "text", @class = "email-field", @id = "inputMessage", @placeholder = "Write your message here..." })
+            </div>
+
+            <div class="col-md-5">
+                <div id="map"></div>
+            </div>
+        </div>
+    }
+
+    <div class="row contact-details">
+        <div>DIÓ 896 Kft.</div>
+        <div>HU-6800 Hódmezővásárhely, Makói út 39.</div>
+        <div>Phone: +36 62 535 462 | Fax: +36 62 535 462 | Email: info@dio896.hu</div>
+    </div>
+    <div class="row">
+        <h4>Egyedi kéréseivel/kérdéseivel keresse üzletkötőinket, tanácsadóinkat!</h4>
+        @Html.Partial("_ContactList", Model.Contacts)
+    </div>
+</div>
+
+

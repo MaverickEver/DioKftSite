@@ -1,0 +1,49 @@
+﻿@model DioKftSite.Models.Photo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Photo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)            
+        </dd>
+
+        <dt>
+            @Html.Label("Image")
+        </dt>
+        <dd>
+            <img src="@Url.Content(Model.ImageUrl)" class="img-responsive admin" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhotoCategory.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

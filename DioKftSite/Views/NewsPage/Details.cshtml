@@ -1,0 +1,57 @@
+﻿@model DioKftSite.Models.News
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    a.thumbnail {
+        width: 50%;
+        height: 50%;
+    }
+
+    iframe.youtube-video {
+        width: 30%;
+        height: 50%;
+    }
+</style>
+
+<div>
+    <h4>News</h4>
+    <hr />
+    <div class="row">
+        <div class="span12">
+            <div class="row">
+                <div class="span8">
+                    <h4><strong><a href="#">@Html.DisplayFor(modelItem => Model.Header)</a></strong></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span2">
+                        <a href="#" class="thumbnail">
+                            <img src="@Url.Content(Model.ImageUrl)" class="img-responsive" />
+                        </a>
+                        <iframe class="youtube-video" src="@Model.VideoUrl"></iframe>
+                </div>
+                <div class="span10">
+                    <p>
+                        @Html.DisplayFor(modelItem => Model.Body)
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span8">
+                    <p></p>
+                    <p>
+                        
+                        Created: <i class="icon-calendar"></i> @Html.DisplayFor(modelItem => Model.Created)
+                        @*| <i class="icon-tags"></i> Category : <a href="#"><span class="label label-info">@Html.DisplayFor(modelItem => item.NewsCategory.Name)</span></a>*@
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Back", "Index")
+    </p>
+</div>

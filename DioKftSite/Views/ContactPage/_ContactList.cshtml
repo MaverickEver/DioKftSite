@@ -1,0 +1,23 @@
+﻿@model System.Collections.Generic.IEnumerable<DioKftSite.Models.Contact>
+
+
+@{var contactList = Model.ToList(); }
+
+@for (var i = 0; i < contactList.Count(); i++)
+{
+    if (i % 4 == 0)
+    {
+
+        @:<div id="contactList">
+        @:<div class="row">
+    }
+
+    @Html.Partial("_ContactItem", contactList[i]);
+
+    if (i + 1 % 4 == 0)
+    {
+        @:</div>
+        @:</div>
+    }
+}
+
