@@ -10,7 +10,7 @@ using DioKftSite.Helpers;
 namespace DioKftSite.Controllers
 {
     [CustomAuthorize]
-    public class NewsController : FilePersistanceController
+    public class NewsController : AzureStorageController
     {
         private DioKftEntities db = new DioKftEntities();
 
@@ -52,7 +52,7 @@ namespace DioKftSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var paths = await this.SaveFilesInRequestAsync(FileLocations.NewsImages);
+                var paths = await this.StoreFilesInRequestAsync(FileLocations.NewsImages);
                 
                 news.ImageUrl = paths.Count == 1 ? paths[0] : null;
                 news.Created = DateTime.Now;
@@ -92,11 +92,11 @@ namespace DioKftSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var paths = await this.SaveFilesInRequestAsync(FileLocations.NewsImages);
+                var paths = await this.StoreFilesInRequestAsync(FileLocations.NewsImages);
 
                 if (paths.Count == 1)
                 {
-                    await this.RemoveSavedFilesFromFileSystemAsync(news.ImageUrl);
+                    await this.RemoveStoredFilesAsync(news.ImageUrl);
                     news.ImageUrl = paths[0];
                 }
                 
@@ -134,7 +134,7 @@ namespace DioKftSite.Controllers
             News news = await db.News.FindAsync(id);
             db.News.Remove(news);
             await db.SaveChangesAsync();
-            await this.RemoveSavedFilesFromFileSystemAsync(news.ImageUrl);
+            await this.RemoveStoredFilesAsync(news.ImageUrl);
             return RedirectToAction("Index");
         }
 

@@ -8,7 +8,7 @@ using DioKftSite.Helpers;
 namespace DioKftSite.Controllers
 {
     [CustomAuthorize]
-    public class ContactsController : FilePersistanceController
+    public class ContactsController : AzureStorageController
     {
         private DioKftEntities db = new DioKftEntities();
 
@@ -48,7 +48,7 @@ namespace DioKftSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var paths = await this.SaveFilesInRequestAsync(FileLocations.ContactImages);
+                var paths = await this.StoreFilesInRequestAsync(FileLocations.ContactImages);
 
                 if (paths.Count == 1)
                 {
@@ -87,11 +87,11 @@ namespace DioKftSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var paths = await this.SaveFilesInRequestAsync(FileLocations.ContactImages);
+                var paths = await this.StoreFilesInRequestAsync(FileLocations.ContactImages);
 
                 if (paths.Count == 1)
                 {
-                    await this.RemoveSavedFilesFromFileSystemAsync(contact.ImageUrl);
+                    await this.RemoveStoredFilesAsync(contact.ImageUrl);
                     contact.ImageUrl = paths[0];
                 }
 
@@ -126,7 +126,7 @@ namespace DioKftSite.Controllers
             db.Contacts.Remove(contact);
             await db.SaveChangesAsync();
 
-            await this.RemoveSavedFilesFromFileSystemAsync(contact.ImageUrl);
+            await this.RemoveStoredFilesAsync(contact.ImageUrl);
 
             return RedirectToAction("Index");
         }

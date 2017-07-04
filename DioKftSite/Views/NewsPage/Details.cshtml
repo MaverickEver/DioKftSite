@@ -14,44 +14,48 @@
         width: 30%;
         height: 50%;
     }
+
+    button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        min-height: 20px;
+        background-color: #125027;
+        color: white;
+        border-radius: 0;
+        line-height: 1.4em;
+        -webkit-transition: background 0.2s linear;
+        -moz-transition: background 0.2s linear;
+        -ms-transition: background 0.2s linear;
+        -o-transition: background 0.2s linear;
+        transition: background 0.2s linear;
+        overflow: hidden;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    #newsListContainer button:hover {
+        background-color: Highlight;
+    }
+
+    #newsListContainer .date {
+        padding: 20px 0px 20px 0px;
+        color: #464646;
+    }
 </style>
 
-<div>
-    <h4>News</h4>
-    <hr />
-    <div class="row">
-        <div class="span12">
-            <div class="row">
-                <div class="span8">
-                    <h4><strong><a href="#">@Html.DisplayFor(modelItem => Model.Header)</a></strong></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span2">
-                        <a href="#" class="thumbnail">
-                            <img src="@Url.Content(Model.ImageUrl)" class="img-responsive" />
-                        </a>
-                        <iframe class="youtube-video" src="@Model.VideoUrl"></iframe>
-                </div>
-                <div class="span10">
-                    <p>
-                        @Html.DisplayFor(modelItem => Model.Body)
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span8">
-                    <p></p>
-                    <p>
-                        
-                        Created: <i class="icon-calendar"></i> @Html.DisplayFor(modelItem => Model.Created)
-                        @*| <i class="icon-tags"></i> Category : <a href="#"><span class="label label-info">@Html.DisplayFor(modelItem => item.NewsCategory.Name)</span></a>*@
-                    </p>
+<div class="container" id="newsListContainer">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <img src="@Url.Content(Model.ImageUrl)" class="img-responsive">
+                <div class="serviceContent">
+                    <div class="title"><h4>@Model.Header</h4></div>
+                    <div class="text">@Model.Body</div>
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "NewsPage")'">@Resources.Resources.Back</button>
+                    <div class="date">@Model.Created.ToString("yyyy.MM.dd.")</div>
                 </div>
             </div>
         </div>
     </div>
-    <p>
-        @Html.ActionLink("Back", "Index")
-    </p>
 </div>

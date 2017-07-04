@@ -78,7 +78,7 @@ namespace DioKftSite.Controllers
                 var absolutePath = Server.MapPath(relativefilePath);
 
                 try
-                {
+                {                    
                     if (System.IO.File.Exists(absolutePath))
                     {
                         System.IO.File.Delete(absolutePath);
