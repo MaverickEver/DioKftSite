@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/services")
+
+<div class="row">
+    <img class="col-md-12" src="~/Content/Images/product-header.png" />
+</div>
+
+<div class="container" id="servicesContainer">
+    <div class="panel panel-default" id="firstSection">
+        <div class="panel-heading">Szolgáltatási díjak</div>
+        <div class="panel-body">
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <img src="~/Content/Images/factory.jpg" class="img-responsive"/>
+            </div>
+
+            <div class="col-xs-12 col-sm-8 col-md-8 description">
+                <table>
+                    @*<tr><th>Szolgáltatási díjak</th></tr>*@
+                    <tr><th>Megnevezés</th><th>Egységár</th></tr>
+                    <tr><td>Betárolás</td><td>350 Ft/t + Áfa</td></tr>
+                    <tr><td>Kitárolás</td><td>500 Ft/t+ Áfa</td><td>(A Dió 896 Kft.-hoz való értékesítés során nem kerül felszámításra)</td></tr>
+                    <tr><td>Tárolás</td><td>70 Ft/t/hét</td></tr>
+                    <tr><td>Tisztítás</td><td>1600 Ft/t+Áfa</td></tr>
+                    <tr><td>Szárítás</td><td>600 Ft/t/víz%</td><td>(Kukorica 13 % felett/ napraforgó 8% felett)</td></tr>                    
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="secondSection">
+        <div class="panel-heading">Növényvédelmi szolgáltatási díjak</div>
+        <div class="panel-body">            
+            <div class="col-xs-12 col-sm-8 col-md-8 description">
+                <table>
+                    @*<tr><th>Növényvédelmi szolgáltatási díjak</th></tr>*@
+                    <tr><td>10 ha alatt</td><td>5000 Ft+Áfa/szerződés</td></tr>
+                    <tr><td>10 - 50 ha között</td><td>500 Ft+Áfa/ha</td></tr>
+                    <tr><td>50 ha felett</td><td>350 Ft+Áfa/ha</td></tr>                    
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <img src="~/Content/Images/sunflower.jpg" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+</div>
+
+

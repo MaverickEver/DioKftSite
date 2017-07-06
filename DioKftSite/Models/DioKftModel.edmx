@@ -24,13 +24,6 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="200" />
           <Property Name="ImageUrl" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Manufacturers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
-        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="Id" />
@@ -72,10 +65,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ManufacturerId" Type="int" Nullable="false" />
-          <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="UnitId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="200" />
+          <Property Name="PlaceOfOrigin" Type="nvarchar" MaxLength="200" />
+          <Property Name="Quality" Type="nvarchar" MaxLength="200" />
+          <Property Name="Type" Type="nvarchar" MaxLength="200" />
+          <Property Name="Culture" Type="nvarchar" MaxLength="200" />
+          <Property Name="AreaOfUsage" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Units">
           <Key>
@@ -115,20 +113,6 @@
             </Principal>
             <Dependent Role="Products">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Products_dbo_Manufacturers_ManufacturerId">
-          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Manufacturers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="ManufacturerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -173,7 +157,6 @@
         <EntityContainer Name="DioKftModelStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsCategories" EntityType="Self.NewsCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoCategories" EntityType="Self.PhotoCategories" Schema="dbo" store:Type="Tables" />
@@ -187,10 +170,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
             <End Role="Categories" EntitySet="Categories" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Products_dbo_Manufacturers_ManufacturerId" Association="Self.FK_dbo_Products_dbo_Manufacturers_ManufacturerId">
-            <End Role="Manufacturers" EntitySet="Manufacturers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Products_dbo_Units_UnitId" Association="Self.FK_dbo_Products_dbo_Units_UnitId">
@@ -231,14 +210,6 @@
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Manufacturer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_Manufacturers_ManufacturerId" FromRole="Manufacturers" ToRole="Products" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -285,13 +256,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="UnitId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_dbo_Products_dbo_Categories_CategoryId" FromRole="Products" ToRole="Categories" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_dbo_Products_dbo_Manufacturers_ManufacturerId" FromRole="Products" ToRole="Manufacturers" />
           <NavigationProperty Name="Unit" Relationship="Self.FK_dbo_Products_dbo_Units_UnitId" FromRole="Products" ToRole="Units" />
+          <Property Name="Manufacturer" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceOfOrigin" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Quality" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Culture" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AreaOfUsage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -307,7 +282,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="FK_dbo_Categories_dbo_Categories_ParentId">
           <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
@@ -332,20 +307,6 @@
             </Principal>
             <Dependent Role="Products">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Products_dbo_Manufacturers_ManufacturerId">
-          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Manufacturers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="ManufacturerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -390,7 +351,6 @@
         <EntityContainer Name="DioKftEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
-          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="NewsCategories" EntityType="Self.NewsCategory" />
           <EntitySet Name="PhotoCategories" EntityType="Self.PhotoCategory" />
@@ -404,10 +364,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
             <End Role="Categories" EntitySet="Categories" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Products_dbo_Manufacturers_ManufacturerId" Association="Self.FK_dbo_Products_dbo_Manufacturers_ManufacturerId">
-            <End Role="Manufacturers" EntitySet="Manufacturers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_News_NewsCategories" Association="Self.FK_News_NewsCategories">
@@ -447,14 +403,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Manufacturers">
-            <EntityTypeMapping TypeName="DioKftModel.Manufacturer">
-              <MappingFragment StoreEntitySet="Manufacturers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -501,8 +449,13 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DioKftModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="AreaOfUsage" ColumnName="AreaOfUsage" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="PlaceOfOrigin" ColumnName="PlaceOfOrigin" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

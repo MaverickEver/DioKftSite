@@ -31,6 +31,15 @@ namespace DioKftSite
 
             bundles.Add(new StyleBundle("~/Content/site-css").Include(
                     "~/Content/CustomDesign/Common.css"));
+
+            bundles.Add(new StyleBundle("~/Content/services").Include(
+                    "~/Content/CustomDesign/Services.css"));
+
+            bundles.Add(new StyleBundle("~/Content/products-page").Include(
+                    "~/Content/CustomDesign/ProductsPage.css"));
+
+            bundles.Add(new StyleBundle("~/Content/news-page").Include(
+                    "~/Content/CustomDesign/NewsPage.css"));
         }
     }
 }

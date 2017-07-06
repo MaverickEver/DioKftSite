@@ -5,19 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="467fe6b2965f420fa19cb7304fa6127f" Name="Diagram1">
-        <EntityTypeShape EntityType="DioKftModel.Category" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DioKftModel.Category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DioKftModel.Contact" Width="1.5" PointX="5.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DioKftModel.Manufacturer" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DioKftModel.News" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DioKftModel.NewsCategory" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DioKftModel.PhotoCategory" Width="1.5" PointX="10.625" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DioKftModel.Photo" Width="1.5" PointX="12.875" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DioKftModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DioKftModel.Unit" Width="1.5" PointX="3.375" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DioKftModel.PhotoCategory" Width="1.5" PointX="10.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DioKftModel.Photo" Width="1.5" PointX="12.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DioKftModel.Product" Width="1.5" PointX="3" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DioKftModel.Unit" Width="1.5" PointX="2.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DioKftModel.User" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="DioKftModel.FK_dbo_Categories_dbo_Categories_ParentId" ManuallyRouted="false" />
         <AssociationConnector Association="DioKftModel.FK_dbo_Products_dbo_Categories_CategoryId" ManuallyRouted="false" />
-        <AssociationConnector Association="DioKftModel.FK_dbo_Products_dbo_Manufacturers_ManufacturerId" ManuallyRouted="false" />
         <AssociationConnector Association="DioKftModel.FK_News_NewsCategories" ManuallyRouted="false" />
         <AssociationConnector Association="DioKftModel.FK_Photos_PhotoCategories" ManuallyRouted="false" />
         <AssociationConnector Association="DioKftModel.FK_dbo_Products_dbo_Units_UnitId" ManuallyRouted="false" />

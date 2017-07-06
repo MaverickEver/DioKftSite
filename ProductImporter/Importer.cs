@@ -62,7 +62,7 @@ namespace MS.WebSolutions.DioKft.ProductImporter
         }
 
         private int CreateEntity<TEntity>(string name, DbContext context, DbSet<TEntity> list) where TEntity : EntityBase, new()
-        {
+        {            
             int id = (from i in list
                       where i.Name == name
                       select i.Id).FirstOrDefault();

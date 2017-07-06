@@ -171,6 +171,9 @@
   <data name="Seeds" xml:space="preserve">
     <value>Vetőmagok</value>
   </data>
+  <data name="Services" xml:space="preserve">
+    <value>Szolgáltatások</value>
+  </data>
   <data name="Trade" xml:space="preserve">
     <value>Termény-kereskedelem</value>
   </data>

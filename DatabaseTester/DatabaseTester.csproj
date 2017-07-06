@@ -50,11 +50,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProductImporter\ProductImporter.csproj">
-      <Project>{d29ad2d6-7edd-483c-92f6-08e060a8d90c}</Project>
-      <Name>ProductImporter</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

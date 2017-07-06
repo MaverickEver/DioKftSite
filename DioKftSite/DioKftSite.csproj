@@ -188,6 +188,7 @@
     <Compile Include="Controllers\PublicPageControllers\GalleryPageController.cs" />
     <Compile Include="Controllers\PublicPageControllers\NewsPageController.cs" />
     <Compile Include="Controllers\PublicPageControllers\ProductPageController.cs" />
+    <Compile Include="Controllers\PublicPageControllers\ServicesController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +196,7 @@
     </Compile>
     <Compile Include="Helpers\CustomAuthorizeAttribute.cs" />
     <Compile Include="Helpers\Encryptor.cs" />
+    <Compile Include="Helpers\Importer.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>DioKftModel.tt</DependentUpon>
     </Compile>
@@ -216,9 +218,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DioKftModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Manufacturer.cs">
-      <DependentUpon>DioKftModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\News.cs">
       <DependentUpon>DioKftModel.tt</DependentUpon>
     </Compile>
@@ -234,22 +233,25 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>DioKftModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\Unit.cs">
       <DependentUpon>DioKftModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>DioKftModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\ViewModels\ContactViewModel.cs" />
     <Compile Include="Models\ViewModels\Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Start\ProductsPage.css" />
     <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomDesign\Common.css" />
+    <Content Include="Content\CustomDesign\NewsPage.css" />
+    <Content Include="Content\CustomDesign\Services.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -260,6 +262,7 @@
     <Content Include="Content\Images\dio logo_barna_korbevagva.png" />
     <Content Include="Content\Images\dio_logo.png" />
     <Content Include="Content\Images\dio_logo_felirat.png" />
+    <Content Include="Content\Images\factory.jpg" />
     <Content Include="Content\Images\integrate.jpg" />
     <Content Include="Content\Images\maxresdefault.jpg" />
     <Content Include="Content\Images\menuhattere.jpg" />
@@ -270,6 +273,7 @@
     <Content Include="Content\Images\Services\termeny_kereskedelem.png" />
     <Content Include="Content\Images\Services\vegyianyag.png" />
     <Content Include="Content\Images\Services\vetomagok.png" />
+    <Content Include="Content\Images\sunflower.jpg" />
     <Content Include="Content\Images\ukraine-photo-blog-14.jpg" />
     <Content Include="Content\Images\vegyianyagok.jpg" />
     <Content Include="favicon.ico" />
@@ -389,6 +393,7 @@
     <Content Include="Views\ContactPage\_ContactItem.cshtml" />
     <Content Include="Views\NewsPage\Index.cshtml" />
     <Content Include="Views\NewsPage\Details.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

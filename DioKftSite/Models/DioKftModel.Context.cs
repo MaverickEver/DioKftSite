@@ -27,7 +27,6 @@ namespace DioKftSite.Models
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsCategory> NewsCategories { get; set; }
         public virtual DbSet<PhotoCategory> PhotoCategories { get; set; }
