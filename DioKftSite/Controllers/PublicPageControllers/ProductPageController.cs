@@ -12,15 +12,16 @@ namespace DioKftSite.Controllers.PublicPageControllers
         // GET: ProductPage
         public ActionResult Index()
         {
-            //var list = new List<Product>();
-            //using (var db = new DioKftEntities())
-            //{
-            //    var query  = db.Products.Include("Unit");
-            //    list = (from p in query
-            //            select p).ToList();
-            //}
+            SelectList categories;
+            using (var db = new DioKftEntities())
+            {
+                categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+            }
 
-            return View();
+            ViewBag.CategoryId = 1;
+            ViewBag.SubCategoryId = 0;            
+
+            return View(categories);
         }
     }
 }

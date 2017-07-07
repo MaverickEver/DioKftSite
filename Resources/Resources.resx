@@ -126,11 +126,20 @@
   <data name="Back" xml:space="preserve">
     <value>Vissza</value>
   </data>
+  <data name="CategoriesInGallery" xml:space="preserve">
+    <value>Galéria Kategóriák</value>
+  </data>
   <data name="Chemicals" xml:space="preserve">
     <value>Vegyianyagok</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kapcsolatok</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Kapcsolatok</value>
+  </data>
+  <data name="CsvFile" xml:space="preserve">
+    <value>*.CSV file</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Törlés</value>
@@ -147,6 +156,9 @@
   <data name="Gallery" xml:space="preserve">
     <value>Galéria</value>
   </data>
+  <data name="Import" xml:space="preserve">
+    <value>Termék Importálás</value>
+  </data>
   <data name="Integration" xml:space="preserve">
     <value>Integráció</value>
   </data>
@@ -159,11 +171,17 @@
   <data name="News" xml:space="preserve">
     <value>Hírek</value>
   </data>
+  <data name="NewsCategories" xml:space="preserve">
+    <value>Hír Kategóriák</value>
+  </data>
   <data name="NewsDetails" xml:space="preserve">
     <value>Bővebben...</value>
   </data>
   <data name="Pesticides" xml:space="preserve">
     <value>Növényvédő szerek</value>
+  </data>
+  <data name="ProductCategories" xml:space="preserve">
+    <value>Termék Kategóriák</value>
   </data>
   <data name="Products" xml:space="preserve">
     <value>Termékek</value>
@@ -176,5 +194,14 @@
   </data>
   <data name="Trade" xml:space="preserve">
     <value>Termény-kereskedelem</value>
+  </data>
+  <data name="Units" xml:space="preserve">
+    <value>Kiszerelések</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Feltöltés</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Felhasználók</value>
   </data>
 </root>

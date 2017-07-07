@@ -1,17 +1,50 @@
-﻿@Styles.Render("~/Content/products-page")
+﻿@using MVCGrid.Web
+@model SelectList
+
+@Styles.Render("~/Content/products-page")
+
+<script>    
+    $(function () {
+         MVCGrid.setAdditionalQueryOptions('Products',
+         {
+             CategoryId: @ViewBag.SubCategoryId == 0 ? @ViewBag.CategoryId : @ViewBag.SubCategoryId
+         });
+    });
+</script>
 
 <div id="productPage">
     <div class="row">
         <img class="col-md-12" src="~/Content/Images/product-header.png" />
     </div>
-    <h1>Feltöltés alatt...</h1>
-    @*<div class="row">
-        @using (Html.BeginForm("Search", "Product", FormMethod.Post))
-        {
-            @Html.DropDownListFor(m => m.SelectedCategoryId, Model.Categories, "Category", new { @class = "form-control", onchange = "this.form.submit();" })
-        }
-    </div>
+    <h1>Termékek</h1>
 
-    @Html.Partial("_ProductTable", Model.Products)*@
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("Főkategória", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategoryId", Model , htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+                </div>
+            </div>       
+            <input style="display:none" id="submit" type="submit" value="Reload" class="btn btn-default" />            
+        </div>
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+        @Html.MVCGrid("Products", new {
+               MVCGridName = "Products",
+               PageSize = true,
+               ColumnVisibility = true,
+               Export = false,
+               GlobalSearch = true,
+               ItemsPerPage = 20
+         })
+        </div>
+    </div>
 </div>
 

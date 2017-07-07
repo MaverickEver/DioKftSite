@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DioKftSite.Helpers
 {
@@ -20,23 +21,26 @@ namespace DioKftSite.Helpers
             this.context = new DioKftEntities();
         }
 
-        public void ClearDatabase()
+        public async Task ClearDatabaseAsync()
         {
             using (var context = new DioKftEntities())
-            {                
-                context.Categories.RemoveRange(context.Categories);                
+            {
+                context.Categories.RemoveRange(context.Categories);
                 context.Units.RemoveRange(context.Units);
                 context.Products.RemoveRange(context.Products);
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             Console.WriteLine("Database Cleared.");
         }
 
-        public string ExecuteImportLogic(string filePath)
+        public async Task<string> ExecuteImportLogicAsync(Stream inputStream, bool forceClear)
         {
-            var fileContent = File.ReadAllText(filePath);
+            if (forceClear) { await this.ClearDatabaseAsync(); }
+
+            var fileContent = new StreamReader(inputStream).ReadToEnd();
+
             var messageQue = new StringBuilder();
             var rows = fileContent.Split(LINE_END);
 
@@ -46,7 +50,7 @@ namespace DioKftSite.Helpers
             {
                 try
                 {
-                    InitializeDatabase(rows.Skip(1), messageQue);
+                    await InitializeDatabaseAsync(rows.Skip(1), messageQue);
 
                     dbContextTransaction.Commit();
                 }
@@ -59,7 +63,7 @@ namespace DioKftSite.Helpers
             return messageQue.ToString();
         }
 
-        private void InitializeDatabase(IEnumerable<string> rows, StringBuilder errorMessage)
+        private async Task InitializeDatabaseAsync(IEnumerable<string> rows, StringBuilder errorMessage)
         {
             foreach (var row in rows)
             {
@@ -73,19 +77,19 @@ namespace DioKftSite.Helpers
 
                 var product = new Product
                 {
-                    Name = cells[0],
-                    UnitId = this.CreateUnit(cells[1]),
-                    CategoryId = this.CreateCategory(cells[2], cells[3]),
-                    PlaceOfOrigin = cells[4],
-                    Manufacturer = cells[5],                    
-                    Quality = cells[6],
-                    Type = cells[7],
-                    Culture = cells[8],
-                    AreaOfUsage = cells[9]
+                    Name = cells[0].Trim(),
+                    UnitId = await this.CreateUnitAsync(cells[1].Trim()),
+                    CategoryId = await this.CreateCategoryAsync(cells[2].Trim(), cells[3].Trim()),
+                    PlaceOfOrigin = cells[4].Trim(),
+                    Manufacturer = cells[5].Trim(),                    
+                    Quality = cells[6].Trim(),
+                    Type = cells[7].Trim(),
+                    Culture = cells[8].Trim(),
+                    AreaOfUsage = cells[9].Trim()
                 };
 
                 context.Products.Add(product);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -95,7 +99,7 @@ namespace DioKftSite.Helpers
 
             for (var i = 0; i < columns.Length; i++)
             {
-                if (columns[i] != this.columns[i])
+                if (columns[i].Trim() != this.columns[i])
                 {
                     messageQue.AppendLine($"Invalid column: original->{this.columns[i]} | imported->{columns[i] ?? "unknown"}");
                 }
@@ -104,9 +108,9 @@ namespace DioKftSite.Helpers
             return messageQue.Length == 0;
         }
 
-        private int CreateCategory(string mainCategory, string subCategory)
+        private async Task<int> CreateCategoryAsync(string mainCategory, string subCategory)
         {
-            var parentId = this.CreateCategory(mainCategory);
+            var parentId = await this.CreateCategoryAsync(mainCategory);
 
             if (parentId == 0)
             {
@@ -115,10 +119,10 @@ namespace DioKftSite.Helpers
 
             if (string.IsNullOrEmpty(subCategory)) { return parentId; }
 
-            return this.CreateCategory(subCategory, parentId);
+            return  await this.CreateCategoryAsync(subCategory, parentId);
         }
 
-        private int CreateCategory(string name, int? parentId = null)
+        private async Task<int> CreateCategoryAsync(string name, int? parentId = null)
         {
             int id = (from i in this.context.Categories
                       where i.Name == name
@@ -128,12 +132,12 @@ namespace DioKftSite.Helpers
 
             var item = new Category { Name = name, ParentId = parentId };
             this.context.Categories.Add(item);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return item.Id;
         }
 
-        private int CreateUnit(string name)
+        private async Task<int> CreateUnitAsync(string name)
         {
             int id = (from i in this.context.Units
                       where i.Name == name
@@ -143,7 +147,7 @@ namespace DioKftSite.Helpers
 
             var item = new Unit { Name = name };
             this.context.Units.Add(item);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return item.Id;
         }

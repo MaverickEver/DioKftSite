@@ -1,20 +1,17 @@
-﻿@{
-    ViewBag.Title = "Admin Page";
-}
-
-<div class="container">
+﻿
+<div class="container" style="margin-top:20px;">
     <div class="row">
         <ul>
-            <li>@Html.ActionLink("Product Categories", "Index", "Categories")</li>
-            <li>@Html.ActionLink("Manufacturers", "Index", "Manufacturers")</li>
-            <li>@Html.ActionLink("Units", "Index", "Units")</li>
-            <li>@Html.ActionLink("Products", "Index", "Products")</li>
-            <li>@Html.ActionLink("Contacts", "Index", "Contacts")</li>
-            <li>@Html.ActionLink("Categories in Gallery", "Index", "PhotoCategories")</li>
-            <li>@Html.ActionLink("Gallery", "Index", "Photos")</li>
-            <li>@Html.ActionLink("News Categories", "Index", "NewsCategories")</li>
-            <li>@Html.ActionLink("News", "Index", "News")</li>
-            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+            <li>@Html.ActionLink(Resources.Resources.Import, "Index", "ProductImport")</li>            
+            <li>@Html.ActionLink(Resources.Resources.ProductCategories, "Index", "Categories")</li>            
+            <li>@Html.ActionLink(Resources.Resources.Units, "Index", "Units")</li>
+            <li>@Html.ActionLink(Resources.Resources.Products, "Index", "Products")</li>
+            <li>@Html.ActionLink(Resources.Resources.Contacts, "Index", "Contacts")</li>
+            <li>@Html.ActionLink(Resources.Resources.CategoriesInGallery, "Index", "PhotoCategories")</li>
+            <li>@Html.ActionLink(Resources.Resources.Gallery, "Index", "Photos")</li>
+            <li>@Html.ActionLink(Resources.Resources.NewsCategories, "Index", "NewsCategories")</li>
+            <li>@Html.ActionLink(Resources.Resources.News, "Index", "News")</li>
+            <li>@Html.ActionLink(Resources.Resources.Users, "Index", "Users")</li>
         </ul>
     </div>
 </div>

@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Galéria Kategóriák.
+        /// </summary>
+        public static string CategoriesInGallery {
+            get {
+                return ResourceManager.GetString("CategoriesInGallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vegyianyagok.
         /// </summary>
         public static string Chemicals {
@@ -102,6 +111,24 @@ namespace Resources {
         public static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kapcsolatok.
+        /// </summary>
+        public static string Contacts {
+            get {
+                return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *.CSV file.
+        /// </summary>
+        public static string CsvFile {
+            get {
+                return ResourceManager.GetString("CsvFile", resourceCulture);
             }
         }
         
@@ -151,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Termék Importálás.
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Integráció.
         /// </summary>
         public static string Integration {
@@ -187,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hír Kategóriák.
+        /// </summary>
+        public static string NewsCategories {
+            get {
+                return ResourceManager.GetString("NewsCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bővebben....
         /// </summary>
         public static string NewsDetails {
@@ -201,6 +246,15 @@ namespace Resources {
         public static string Pesticides {
             get {
                 return ResourceManager.GetString("Pesticides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Termék Kategóriák.
+        /// </summary>
+        public static string ProductCategories {
+            get {
+                return ResourceManager.GetString("ProductCategories", resourceCulture);
             }
         }
         
@@ -237,6 +291,33 @@ namespace Resources {
         public static string Trade {
             get {
                 return ResourceManager.GetString("Trade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kiszerelések.
+        /// </summary>
+        public static string Units {
+            get {
+                return ResourceManager.GetString("Units", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feltöltés.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Felhasználók.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
     }

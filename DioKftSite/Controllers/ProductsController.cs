@@ -15,7 +15,7 @@ namespace DioKftSite.Controllers
         // GET: Products
         public async Task<ActionResult> Index()
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Unit);
+            var products = db.Products.Include(p => p.Category).Include(p => p.Unit);
             return View(await products.ToListAsync());
         }
 
@@ -38,7 +38,6 @@ namespace DioKftSite.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
             ViewBag.UnitId = new SelectList(db.Units, "Id", "Name");
             return View();
         }
@@ -48,7 +47,7 @@ namespace DioKftSite.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,ManufacturerId,CategoryId,UnitId,Name")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "Id,CategoryId,UnitId,Name,Manufacturer,PlaceOfOrigin,Quality,Type,Culture,AreaOfUsage")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +57,6 @@ namespace DioKftSite.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewBag.UnitId = new SelectList(db.Units, "Id", "Name", product.UnitId);
             return View(product);
         }
@@ -76,7 +74,6 @@ namespace DioKftSite.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewBag.UnitId = new SelectList(db.Units, "Id", "Name", product.UnitId);
             return View(product);
         }
@@ -86,7 +83,7 @@ namespace DioKftSite.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ManufacturerId,CategoryId,UnitId,Name")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,CategoryId,UnitId,Name,Manufacturer,PlaceOfOrigin,Quality,Type,Culture,AreaOfUsage")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +92,6 @@ namespace DioKftSite.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewBag.UnitId = new SelectList(db.Units, "Id", "Name", product.UnitId);
             return View(product);
         }
