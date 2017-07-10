@@ -1,15 +1,81 @@
-﻿@using MVCGrid.Web
-@model SelectList
+﻿@model SelectList
 
-@Styles.Render("~/Content/products-page")
+<script>
 
-<script>    
-    $(function () {
-         MVCGrid.setAdditionalQueryOptions('Products',
-         {
-             CategoryId: @ViewBag.SubCategoryId == 0 ? @ViewBag.CategoryId : @ViewBag.SubCategoryId
-         });
-    });
+    var mainCategoryChange = function () {
+        var selectedValue = $('#mainCategoryId').val();
+
+        var productTable = $('#productTableBody');
+        productTable.html('<tr><td>@Resources.Resources.EmptyProductTable</td></tr>');
+
+        if (selectedValue != null && selectedValue != '' && selectedValue != "--------" && selectedValue != -1) {
+            $.getJSON('@Url.Action("GetSubCategories")', { mainCategoryId: selectedValue }, populateSubCategories);
+        } else {
+            var subCategorySelect = $('#subCategoryId');
+            subCategorySelect.empty();
+            subCategorySelect.append($('<option/>', {
+                value: -1,
+                text: "--------"
+            }));
+        }
+
+
+    }
+
+    var subCategoryChange = function () {
+        var productTable = $('#productTableBody');
+        productTable.html('<tr><td>@Resources.Resources.EmptyProductTable</td></tr>');
+
+        var subCategoryValue = $('#subCategoryId').val();
+        var mainCategoryValue = $('#mainCategoryId').val();
+
+        if (mainCategoryValue != null && mainCategoryValue != '' && mainCategoryValue != -1 && mainCategoryValue != "--------") {
+            $.getJSON('@Url.Action("GetProducts")', { mainCategoryId: mainCategoryValue, subCategoryId: subCategoryValue }, populateProducts);
+        }
+    }
+
+    var populateSubCategories = function (subCategories) {
+        var subCategorySelect = $('#subCategoryId');
+
+        subCategorySelect.empty();
+
+        subCategorySelect.append($('<option/>', {
+            value: -1,
+            text: "--------"
+        }));
+
+        if (subCategories.length == 0) {
+            subCategoryChange();
+        }
+
+        $.each(subCategories, function (index, category) {
+            subCategorySelect.append($('<option/>', {
+                value: category.value,
+                text: category.text
+            }));
+        });
+    }
+
+    var populateProducts = function (products) {
+        var productTable = $('#productTableBody');
+
+        productTable.html('');
+
+        $.each(products, function (index, product) {
+
+            productTable.append("<tr id='product" + product.Id + "'/>");
+            row = $("#product" + product.Id);
+
+            row.append(('<td >' + product.Name + '</td>'));
+            row.append(('<td >' + product.UnitName + '</td>'));
+            row.append(('<td >' + product.Manufacturer + '</td>'));
+            row.append(('<td >' + product.PlaceOfOrigin + '</td>'));
+            row.append(('<td >' + product.Quality + '</td>'));
+            row.append(('<td >' + product.Type + '</td>'));
+            row.append(('<td >' + product.Culture + '</td>'));
+            row.append(('<td >' + product.AreaOfUsage + '</td>'));
+        });
+    }
 </script>
 
 <div id="productPage">
@@ -17,34 +83,45 @@
         <img class="col-md-12" src="~/Content/Images/product-header.png" />
     </div>
     <h1>Termékek</h1>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <div class="form-group">
-                @Html.Label("Főkategória", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("CategoryId", Model , htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
-                </div>
-            </div>       
-            <input style="display:none" id="submit" type="submit" value="Reload" class="btn btn-default" />            
+    <div class="row">
+        <div class="form-group">
+            @Html.Label(Resources.Resources.MainCategoryLabel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("mainCategoryId", Model, "--------", htmlAttributes: new { @class = "form-control", onchange = "mainCategoryChange();" })
+            </div>
         </div>
-    }
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-
-        @Html.MVCGrid("Products", new {
-               MVCGridName = "Products",
-               PageSize = true,
-               ColumnVisibility = true,
-               Export = false,
-               GlobalSearch = true,
-               ItemsPerPage = 20
-         })
+        <div class="form-group">
+            @Html.Label(Resources.Resources.SubCategoryLabel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("subCategoryId", Enumerable.Empty<SelectListItem>(), "--------", htmlAttributes: new { @class = "form-control", onchange = "subCategoryChange" })
+            </div>
         </div>
     </div>
-</div>
 
+
+    <div class="panel panel-default">
+        <div class="panel-body">                    
+            <table class="table table-striped" >            
+                <thead>
+                    <tr>
+                        <th>@Resources.Resources.ProductName</th>
+                        <th>@Resources.Resources.UnitName</th>
+                        <th>@Resources.Resources.Manufacturer</th>
+                        <th>@Resources.Resources.PlaceOfOrigin</th>
+                        <th>@Resources.Resources.Quality</th>
+                        <th>@Resources.Resources.Type</th>
+                        <th>@Resources.Resources.Culture</th>
+                        <th>@Resources.Resources.AreaOfUsage</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <tr><td>@Resources.Resources.EmptyProductTable</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @Styles.Render("~/Content/products-page")    
+    
+</div>

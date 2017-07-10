@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Felhasználási tertület.
+        /// </summary>
+        public static string AreaOfUsage {
+            get {
+                return ResourceManager.GetString("AreaOfUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vissza.
         /// </summary>
         public static string Back {
@@ -160,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Válasszon kategóriát a termékek megjelenítéséhez..
+        /// </summary>
+        public static string EmptyProductTable {
+            get {
+                return ResourceManager.GetString("EmptyProductTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Műtrágya.
         /// </summary>
         public static string Fertilizer {
@@ -214,6 +232,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Főkategória.
+        /// </summary>
+        public static string MainCategoryLabel {
+            get {
+                return ResourceManager.GetString("MainCategoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gyártó.
+        /// </summary>
+        public static string Manufacturer {
+            get {
+                return ResourceManager.GetString("Manufacturer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hírek.
         /// </summary>
         public static string News {
@@ -250,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Származási hely.
+        /// </summary>
+        public static string PlaceOfOrigin {
+            get {
+                return ResourceManager.GetString("PlaceOfOrigin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Termék Kategóriák.
         /// </summary>
         public static string ProductCategories {
@@ -259,11 +304,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Név.
+        /// </summary>
+        public static string ProductName {
+            get {
+                return ResourceManager.GetString("ProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Termékek.
         /// </summary>
         public static string Products {
             get {
                 return ResourceManager.GetString("Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minőség.
+        /// </summary>
+        public static string Quality {
+            get {
+                return ResourceManager.GetString("Quality", resourceCulture);
             }
         }
         
@@ -286,11 +349,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alkategória.
+        /// </summary>
+        public static string SubCategoryLabel {
+            get {
+                return ResourceManager.GetString("SubCategoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Termény-kereskedelem.
         /// </summary>
         public static string Trade {
             get {
                 return ResourceManager.GetString("Trade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Típus.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kiszerelés.
+        /// </summary>
+        public static string UnitName {
+            get {
+                return ResourceManager.GetString("UnitName", resourceCulture);
             }
         }
         

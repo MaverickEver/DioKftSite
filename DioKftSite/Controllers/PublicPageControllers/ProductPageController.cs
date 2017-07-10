@@ -16,12 +16,35 @@ namespace DioKftSite.Controllers.PublicPageControllers
             using (var db = new DioKftEntities())
             {
                 categories = new SelectList(db.Categories.ToList(), "Id", "Name");
-            }
-
-            ViewBag.CategoryId = 1;
-            ViewBag.SubCategoryId = 0;            
+            }            
 
             return View(categories);
+        }
+
+        public ActionResult GetSubCategories(int mainCategoryId)
+        {
+            SelectList categories;
+            using (var db = new DioKftEntities())
+            {
+                categories = new SelectList(db.Categories.Where(c =>c.ParentId == mainCategoryId).ToList(), "Id", "Name");
+            }
+
+            return Json(categories, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProducts(int mainCategoryId, int subCategoryId)
+        {
+            
+            using (var db = new DioKftEntities())
+            {
+                var products = db.Products
+                            .Include("Unit")
+                            .Where(p => subCategoryId <= 0 ? p.CategoryId == mainCategoryId : p.CategoryId == subCategoryId)
+                            .OrderBy(p => p.Name).ThenBy(p => p.Unit.Name)
+                            .Select(p => new { p.Id, p.Name, UnitName = p.Unit.Name, p.Manufacturer, p.PlaceOfOrigin, p.Quality, p.Type, p.Culture, p.AreaOfUsage}).ToList();
+
+                return Json(products, JsonRequestBehavior.AllowGet);
+            }            
         }
     }
 }

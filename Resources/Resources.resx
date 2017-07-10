@@ -123,6 +123,9 @@
   <data name="Admin" xml:space="preserve">
     <value>Admin Felület</value>
   </data>
+  <data name="AreaOfUsage" xml:space="preserve">
+    <value>Felhasználási tertület</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Vissza</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="CsvFile" xml:space="preserve">
     <value>*.CSV file</value>
   </data>
+  <data name="Culture" xml:space="preserve">
+    <value>Kultúra</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Törlés</value>
   </data>
@@ -149,6 +155,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Szerkesztés</value>
+  </data>
+  <data name="EmptyProductTable" xml:space="preserve">
+    <value>Válasszon kategóriát a termékek megjelenítéséhez.</value>
   </data>
   <data name="Fertilizer" xml:space="preserve">
     <value>Műtrágya</value>
@@ -168,6 +177,12 @@
   <data name="Logout" xml:space="preserve">
     <value>Kijelentkezés</value>
   </data>
+  <data name="MainCategoryLabel" xml:space="preserve">
+    <value>Főkategória</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>Gyártó</value>
+  </data>
   <data name="News" xml:space="preserve">
     <value>Hírek</value>
   </data>
@@ -180,11 +195,20 @@
   <data name="Pesticides" xml:space="preserve">
     <value>Növényvédő szerek</value>
   </data>
+  <data name="PlaceOfOrigin" xml:space="preserve">
+    <value>Származási hely</value>
+  </data>
   <data name="ProductCategories" xml:space="preserve">
     <value>Termék Kategóriák</value>
   </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Név</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>Termékek</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Minőség</value>
   </data>
   <data name="Seeds" xml:space="preserve">
     <value>Vetőmagok</value>
@@ -192,8 +216,17 @@
   <data name="Services" xml:space="preserve">
     <value>Szolgáltatások</value>
   </data>
+  <data name="SubCategoryLabel" xml:space="preserve">
+    <value>Alkategória</value>
+  </data>
   <data name="Trade" xml:space="preserve">
     <value>Termény-kereskedelem</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Típus</value>
+  </data>
+  <data name="UnitName" xml:space="preserve">
+    <value>Kiszerelés</value>
   </data>
   <data name="Units" xml:space="preserve">
     <value>Kiszerelések</value>
