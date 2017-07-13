@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DioKftSite.Models;
 using System.Net.Mail;
 using DioSiteKft.Models;
+using System.Text;
 
 namespace DioKftSite.Controllers.PublicPageControllers
 {
@@ -15,6 +16,21 @@ namespace DioKftSite.Controllers.PublicPageControllers
         public ActionResult Index()
         {
             var viewModel = new ContactViewModel { Contacts = this.GetAllContacts() };
+
+            var shoppingCart = (this.Session[ProductPageController.SHOPPING_CART] as Dictionary<string, OrderItem>)?.Values?.ToList() ?? new List<OrderItem>();
+            if ((shoppingCart?.Count ?? 0) > 0)
+            {
+                var stringBuilder = new StringBuilder();
+
+                stringBuilder.AppendLine($"Megrendelt tételek: ");
+
+                foreach (var item in shoppingCart)
+                {
+                    stringBuilder.AppendLine($"Termék: {item.ProductName}, {item.Quantity} X {item.UnitName}");
+                }
+
+                viewModel.Email.Message = stringBuilder.ToString();
+            }
             return View(viewModel);
         }
 

@@ -1,5 +1,10 @@
-﻿@model SelectList
+﻿@using System.Web.Script.Serialization;
 
+@model DioKftSite.Models.ViewModels.ProductPageViewModel
+
+@{ 
+    var initialShoppingCart = System.Web.HttpUtility.HtmlDecode( new JavaScriptSerializer().Serialize(Model.ShoppingCart));
+}
 <script>
 
     var mainCategoryChange = function () {
@@ -63,19 +68,62 @@
 
         $.each(products, function (index, product) {
 
-            productTable.append("<tr id='product" + product.Id + "'/>");
-            row = $("#product" + product.Id);
+            productTable.append("<tr id='productRow" + product.Id + "'/>");
+            row = $("#productRow" + product.Id);
 
-            row.append(('<td >' + product.Name + '</td>'));
-            row.append(('<td >' + product.UnitName + '</td>'));
-            row.append(('<td >' + product.Manufacturer + '</td>'));
-            row.append(('<td >' + product.PlaceOfOrigin + '</td>'));
-            row.append(('<td >' + product.Quality + '</td>'));
-            row.append(('<td >' + product.Type + '</td>'));
-            row.append(('<td >' + product.Culture + '</td>'));
-            row.append(('<td >' + product.AreaOfUsage + '</td>'));
+            row.append('<td>' + product.Name + '</td>');
+            row.append('<td>' + product.UnitName + '</td>');
+            row.append('<td>' + product.Manufacturer + '</td>');
+            row.append('<td>' + product.PlaceOfOrigin + '</td>');
+            row.append('<td>' + product.Quality + '</td>');
+            row.append('<td>' + product.Type + '</td>');
+            row.append('<td>' + product.Culture + '</td>');
+            row.append('<td>' + product.AreaOfUsage + '</td>');
+            row.append('<td><input type="text" class="form-control" placeholder="...db" id="quantity' + product.Id + '"></td>');
+            row.append('<td><button id="productButton' + product.Id + '" type="button" class="btn customButton" onclick="addToProductCart(' + product.Id + ');">Kosárhoz ad</button></td>');
         });
     }
+
+    var addToProductCart = function (id) {
+        var quantity = $('#quantity' + id).val();
+
+        if (quantity == 0 || !$.isNumeric(quantity)) { alert("Kérem adjon meg egy nullánál nagyobb egész számot."); }
+
+        $.getJSON('@Url.Action("AddProdutToCart")', { productId: id, quantity: quantity }, drawShoppingCart);
+    }
+
+    var removeFromShoppingCart = function (id) {
+        $.getJSON('@Url.Action("RemoveProdutFromCart")', { productId: id }, drawShoppingCart);
+    }
+
+    var drawShoppingCart = function (shoppingCartItems) {
+        var shoppingCart = $('#shoppingCartBody');
+        shoppingCart.html('');
+
+        if (shoppingCartItems.length > 0) {
+            $("#checkoutButton").removeClass("disabled");
+            $("#showShoppingCartButton").html("Kosár tartalma (" + shoppingCartItems.length + " elem)")
+
+            $.each(shoppingCartItems, function (index, shoppingCartItem) {
+
+                shoppingCart.append("<tr id='orderItem" + shoppingCartItem.ProductId + "'/>");
+                row = $("#orderItem" + shoppingCartItem.ProductId);
+
+                row.append('<td>' + shoppingCartItem.ProductName + '</td>');
+                row.append('<td>' + shoppingCartItem.UnitName + '</td>');
+                row.append('<td>' + shoppingCartItem.Quantity + '</td>');
+                row.append('<td><button id="orderItemButton' + shoppingCartItem.ProductId + '" type="button" class="btn customButton" onclick="removeFromShoppingCart(' + shoppingCartItem.ProductId + ');">Törlés</button></td>');
+            });
+        } else {
+            $("#checkoutButton").addClass("disabled");
+            $("#showShoppingCartButton").html("Kosár tartalma")
+        }
+    }
+
+    $(function () {
+        var items = JSON.parse($('<div/>').html("@initialShoppingCart").text());
+        drawShoppingCart(items);
+    });
 </script>
 
 <div id="productPage">
@@ -86,14 +134,16 @@
     <div class="row">
         <div class="form-group">
             @Html.Label(Resources.Resources.MainCategoryLabel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("mainCategoryId", Model, "--------", htmlAttributes: new { @class = "form-control", onchange = "mainCategoryChange();" })
+            <div class="col-md-5">
+                @Html.DropDownList("mainCategoryId", Model.MainCategories, "--------", htmlAttributes: new { @class = "form-control", onchange = "mainCategoryChange();" })
+            </div>
+            <div class="col-md-5">
+                <button id="showShoppingCartButton" type="button" class="btn customButton" data-toggle="modal" data-target="#myModal">Kosár tartalma</button>
             </div>
         </div>
-
         <div class="form-group">
             @Html.Label(Resources.Resources.SubCategoryLabel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.DropDownList("subCategoryId", Enumerable.Empty<SelectListItem>(), "--------", htmlAttributes: new { @class = "form-control", onchange = "subCategoryChange" })
             </div>
         </div>
@@ -113,12 +163,47 @@
                         <th>@Resources.Resources.Type</th>
                         <th>@Resources.Resources.Culture</th>
                         <th>@Resources.Resources.AreaOfUsage</th>
+                        <th>Mennyiség</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="productTableBody">
                     <tr><td>@Resources.Resources.EmptyProductTable</td></tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Kosár Tartalma</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Resources.Resources.ProductName</th>
+                                <th>@Resources.Resources.UnitName</th>
+                                <th>@Resources.Resources.Quantity</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="shoppingCartBody">                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="checkoutButton"type="button" class="btn btn-success disabled" data-dismiss="modal" onclick="location.href='@Url.Action("Index","contactPage")';">Rendelés leadása</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bezár</button>
+                </div>
+            </div>
+
         </div>
     </div>
 

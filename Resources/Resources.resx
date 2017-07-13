@@ -210,6 +210,9 @@
   <data name="Quality" xml:space="preserve">
     <value>Minőség</value>
   </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Mennyiség</value>
+  </data>
   <data name="Seeds" xml:space="preserve">
     <value>Vetőmagok</value>
   </data>

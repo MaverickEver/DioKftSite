@@ -3,7 +3,7 @@
     background-color: #125027;
     border-radius: 0px;
     color: white;
-    padding: 0px 12px 0px 12px !important;
+    padding: 0px 12px 0px 12px !important;    
 }
 
 .form-group {
@@ -18,3 +18,11 @@
     max-height:450px;
     overflow-y:scroll;
 }
+
+    .panel-body .customButton {
+        margin-top: 5px;
+    }
+
+    .panel-body input {
+        width:60px;
+    }

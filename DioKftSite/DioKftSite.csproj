@@ -245,6 +245,8 @@
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\ViewModels\ContactViewModel.cs" />
     <Compile Include="Models\ViewModels\Email.cs" />
+    <Compile Include="Models\ViewModels\OrderItem.cs" />
+    <Compile Include="Models\ViewModels\ProductPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
