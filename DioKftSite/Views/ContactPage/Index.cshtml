@@ -104,8 +104,9 @@
 </script>
 
 <div id="contactPage">
-    <div class="row">
-        <img class="headerImage" src="~/Content/Images/contact-header.jpg" />
+    <div class="header-image">
+        <img class="col-md-12" src="~/Content/Images/contact-header.jpg" />
+        <span>@Resources.Resources.Contacts</span>
     </div>
 
     @using (Html.BeginForm("SendEmail", "ContactPage", FormMethod.Post))
@@ -114,15 +115,15 @@
             <h3>Ajánlatkérés / Kapcsolat / Rendelés</h3>
 
             <div class="col-md-3">
-                @Html.TextBoxFor(m => m.Email.Name, new { @type = "text", @class = "email-field", @id = "inputName", @placeholder = "Enter name" })
-                @Html.TextBoxFor(m => m.Email.CompanyName, new { @type = "text", @class = "email-field", @id = "inputCompanyName", @placeholder = "Company Name" })
-                @Html.TextBoxFor(m => m.Email.EmailAddress, new { @type = "email", @class = "email-field", @id = "inputEmailAdress", @placeholder = "E-mail adress" })
-                @Html.TextBoxFor(m => m.Email.PhoneNumber, new { @type = "tel", @class = "email-field", @id = "inputPhoneNumber", @placeholder = "Phone number" })
-                <button type="submit" class="btn disabled">Send</button>
+                @Html.TextBoxFor(m => m.Email.Name, new { @type = "text", @class = "email-field", @id = "inputName", @placeholder = "Név..." })
+                @Html.TextBoxFor(m => m.Email.CompanyName, new { @type = "text", @class = "email-field", @id = "inputCompanyName", @placeholder = "Cég név..." })
+                @Html.TextBoxFor(m => m.Email.EmailAddress, new { @type = "email", @class = "email-field", @id = "inputEmailAdress", @placeholder = "E-mail cím ..." })
+                @Html.TextBoxFor(m => m.Email.PhoneNumber, new { @type = "tel", @class = "email-field", @id = "inputPhoneNumber", @placeholder = "Telefonszám..." })
+                <button type="submit" class="btn disabled">Küldés</button>
             </div>
 
             <div class="col-md-4">
-                @Html.TextAreaFor(m => m.Email.Message, 14, 55, new { @type = "text", @class = "email-field", @id = "inputMessage", @placeholder = "Write your message here..." })
+                @Html.TextAreaFor(m => m.Email.Message, 14, 55, new { @type = "text", @class = "email-field", @id = "inputMessage", @placeholder = "Üzenet ..." })
             </div>
 
             <div class="col-md-5">

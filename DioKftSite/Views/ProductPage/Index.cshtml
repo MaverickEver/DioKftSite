@@ -127,11 +127,12 @@
 </script>
 
 <div id="productPage">
-    <div class="row">
+    <div class="header-image">
         <img class="col-md-12" src="~/Content/Images/product-header.png" />
+        <span>Termékek</span>
     </div>
-    <h1>Termékek</h1>
-    <div class="row">
+    
+    <div class="row container-div">
         <div class="form-group">
             @Html.Label(Resources.Resources.MainCategoryLabel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
@@ -199,7 +200,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button id="checkoutButton"type="button" class="btn btn-success disabled" data-dismiss="modal" onclick="location.href='@Url.Action("Index","contactPage")';">Rendelés leadása</button>
+                    <button id="checkoutButton"type="button" class="btn btn-success disabled" data-dismiss="modal" onclick="location.href='@Url.Action("Index","contactPage")';">Árajánlat kérés</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Bezár</button>
                 </div>
             </div>

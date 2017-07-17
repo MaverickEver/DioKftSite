@@ -37,9 +37,9 @@ namespace DioKftSite.Helpers
 
         public async Task<string> ExecuteImportLogicAsync(Stream inputStream, bool forceClear)
         {
-            if (forceClear) { await this.ClearDatabaseAsync(); }
+            if (forceClear) { await this.ClearDatabaseAsync(); }            
 
-            var fileContent = new StreamReader(inputStream).ReadToEnd();
+            var fileContent = new StreamReader(inputStream, Encoding.UTF8, true).ReadToEnd();
 
             var messageQue = new StringBuilder();
             var rows = fileContent.Split(LINE_END);
@@ -60,7 +60,7 @@ namespace DioKftSite.Helpers
                 }
             }
 
-            return messageQue.ToString();
+            return messageQue.ToString().Trim();
         }
 
         private async Task InitializeDatabaseAsync(IEnumerable<string> rows, StringBuilder errorMessage)

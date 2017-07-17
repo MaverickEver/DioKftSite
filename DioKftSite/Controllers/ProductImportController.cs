@@ -29,7 +29,7 @@ namespace DioKftSite.Controllers
                 if (Request?.Files[0]?.InputStream == null)
                 {
                     ViewBag.Error = "Wrong file content";
-                    return View();
+                    return View("Index");
                 }
 
                 var message = await importProcess.ExecuteImportLogicAsync(Request.Files[0].InputStream, forceClean);
@@ -37,7 +37,7 @@ namespace DioKftSite.Controllers
                 if (!string.IsNullOrEmpty(message))
                 {
                     ViewBag.Error = message;
-                    return View();
+                    return View("Index");
                 }
             }
 

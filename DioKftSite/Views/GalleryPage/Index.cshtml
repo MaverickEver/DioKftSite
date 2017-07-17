@@ -26,10 +26,10 @@
     }
 </style>
 <div id="galleryPage">
-    <div class="row">
-        <img class="headerImage" src="~/Content/Images/product-header.png" />
+    <div class="header-image">
+        <img class="col-md-12" src="~/Content/Images/product-header.png" />
+        <span>@Resources.Resources.Gallery</span>
     </div>
-    <h1>@Resources.Resources.Gallery</h1>
 
     @{var photos = Model.ToList(); }
 
