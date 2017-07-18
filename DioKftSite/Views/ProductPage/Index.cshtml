@@ -22,9 +22,8 @@
                 value: -1,
                 text: "--------"
             }));
+            $('.column').show();
         }
-
-
     }
 
     var subCategoryChange = function () {
@@ -35,7 +34,9 @@
         var mainCategoryValue = $('#mainCategoryId').val();
 
         if (mainCategoryValue != null && mainCategoryValue != '' && mainCategoryValue != -1 && mainCategoryValue != "--------") {
-            $.getJSON('@Url.Action("GetProducts")', { mainCategoryId: mainCategoryValue, subCategoryId: subCategoryValue }, populateProducts);
+            $.getJSON('@Url.Action("GetProducts")', { mainCategoryId: mainCategoryValue, subCategoryId: subCategoryValue }, populateProducts).always(function () { $("#loading").hide(); });
+        } else {
+            $('.column').show();
         }
     }
 
@@ -73,14 +74,21 @@
 
             row.append('<td>' + product.Name + '</td>');
             row.append('<td>' + product.UnitName + '</td>');
-            row.append('<td>' + product.Manufacturer + '</td>');
-            row.append('<td>' + product.PlaceOfOrigin + '</td>');
-            row.append('<td>' + product.Quality + '</td>');
-            row.append('<td>' + product.Type + '</td>');
-            row.append('<td>' + product.Culture + '</td>');
-            row.append('<td>' + product.AreaOfUsage + '</td>');
+            row.append('<td class="manufacturer column">' + product.Manufacturer + '</td>');            
+            row.append('<td class="placeOfOrigin column">' + product.PlaceOfOrigin + '</td>');
+            row.append('<td class="quality column">' + product.Quality + '</td>');
+            row.append('<td class="type column">' + product.Type + '</td>');
+            row.append('<td class="culture column">' + product.Culture + '</td>');
+            row.append('<td class="areaOfUsage column">' + product.AreaOfUsage + '</td>');
             row.append('<td><input type="text" class="form-control" placeholder="...db" id="quantity' + product.Id + '"></td>');
             row.append('<td><button id="productButton' + product.Id + '" type="button" class="btn customButton" onclick="addToProductCart(' + product.Id + ');">Kosárhoz ad</button></td>');
+
+            validateColumn(product.Manufacturer, "manufacturer");
+            validateColumn(product.PlaceOfOrigin, "placeOfOrigin");
+            validateColumn(product.Quality, "quality");
+            validateColumn(product.Culture, "culture");
+            validateColumn(product.Type, "type");
+            validateColumn(product.AreaOfUsage, "areaOfUsage");            
         });
     }
 
@@ -120,19 +128,36 @@
         }
     }
 
+    var validateColumn = function (shoppingCartItemProperty, className) {
+        if (shoppingCartItemProperty != null && shoppingCartItemProperty != '' && shoppingCartItemProperty != undefined && shoppingCartItemProperty != 'undefined') {
+            $('.'+className).show();
+        } else {
+            $('.'+className).hide();
+        }       
+    }
+
     $(function () {
         var items = JSON.parse($('<div/>').html("@initialShoppingCart").text());
         drawShoppingCart(items);
+
+        $.ajaxSetup({
+            beforeSend: function () {
+                // show gif here, eg:
+                $("#loading").show();
+            }
+        });
     });
 </script>
+<div class="header-image">
+    <img class="col-md-12" src="~/Content/Images/product-header.png" />
+    <span>Termékek</span>
+</div>
 
-<div id="productPage">
-    <div class="header-image">
-        <img class="col-md-12" src="~/Content/Images/product-header.png" />
-        <span>Termékek</span>
-    </div>
+<div id="productPage" style="position:relative">
     
-    <div class="row container-div">
+    <div id="loading"><i class="fa fa-refresh fa-spin"></i></div>
+
+    <div class="row container-div">        
         <div class="form-group">
             @Html.Label(Resources.Resources.MainCategoryLabel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
@@ -158,12 +183,12 @@
                     <tr>
                         <th>@Resources.Resources.ProductName</th>
                         <th>@Resources.Resources.UnitName</th>
-                        <th>@Resources.Resources.Manufacturer</th>
-                        <th>@Resources.Resources.PlaceOfOrigin</th>
-                        <th>@Resources.Resources.Quality</th>
-                        <th>@Resources.Resources.Type</th>
-                        <th>@Resources.Resources.Culture</th>
-                        <th>@Resources.Resources.AreaOfUsage</th>
+                        <th class="manufacturer column">@Resources.Resources.Manufacturer</th>
+                        <th class="placeOfOrigin column">@Resources.Resources.PlaceOfOrigin</th>
+                        <th class="quality column">@Resources.Resources.Quality</th>
+                        <th class="typ columne">@Resources.Resources.Type</th>
+                        <th class="culture column">Kultúra</th>
+                        <th class="areaOfUsage column">@Resources.Resources.AreaOfUsage</th>
                         <th>Mennyiség</th>
                         <th></th>
                     </tr>

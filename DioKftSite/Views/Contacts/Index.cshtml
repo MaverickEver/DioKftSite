@@ -45,7 +45,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ImageUrl)
-            <img src="@Url.Content(item.ImageUrl)" class="img-responsive admin" />
+            <img src="@Url.Content(item.ImageUrl ?? "~/content/images/default-avatar.png")" class="img-responsive admin" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

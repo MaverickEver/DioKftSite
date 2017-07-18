@@ -89,7 +89,7 @@ iframe.youtube-video-edit {
     width: 100%;
 }
 
-img {
+.header-image img {
     padding: 0 !important;
     margin: 0 !important;
 }
@@ -111,3 +111,29 @@ div.header-image span {
     padding-right: 10px;
     color: white;
 }
+
+#loading {
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);    
+    z-index:1000;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:none;
+}
+    #loading i {
+        color: #125027;
+        width: 100px;
+        height: 100px;
+        margin: 50px auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+        #loading i:before {
+            font-size: 100px;            
+        }

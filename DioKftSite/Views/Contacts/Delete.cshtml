@@ -55,7 +55,7 @@
             @Html.Label("Image")
         </dt>
         <dd>
-            <img src="@Url.Content(Model.ImageUrl)" class="img-responsive admin" />
+            <img src="@Url.Content(Model.ImageUrl ?? "~/content/images/default-avatar.png")" class="img-responsive admin" />
         </dd>
 
     </dl>
