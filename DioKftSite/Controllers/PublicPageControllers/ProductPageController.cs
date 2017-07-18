@@ -1,9 +1,9 @@
 ﻿using DioKftSite.Models;
 using DioKftSite.Models.ViewModels;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace DioKftSite.Controllers.PublicPageControllers
@@ -40,16 +40,16 @@ namespace DioKftSite.Controllers.PublicPageControllers
             return Json(categories, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetProducts(int mainCategoryId, int subCategoryId)
+        public async Task<ActionResult> GetProducts(int mainCategoryId, int subCategoryId)
         {            
             using (var db = new DioKftEntities())
             {
-                var products = db.Products
-                            .Include("Unit")
-                            .Where(p => subCategoryId <= 0 ? p.CategoryId == mainCategoryId : p.CategoryId == subCategoryId)
-                            .OrderBy(p => p.Name).ThenBy(p => p.Unit.Name)
-                            .Select(p => new { p.Id, p.Name, UnitName = p.Unit.Name, p.Manufacturer, p.PlaceOfOrigin, p.Quality, p.Type, p.Culture, p.AreaOfUsage}).ToList();
-
+                var products = await db.Products
+                                    .Include("Unit")
+                                    .Where(p => subCategoryId <= 0 ? p.CategoryId == mainCategoryId : p.CategoryId == subCategoryId)
+                                    .OrderBy(p => p.Name).ThenBy(p => p.Unit.Name)
+                                    .Select(p => new { p.Id, p.Name, UnitName = p.Unit.Name, p.Manufacturer, p.PlaceOfOrigin, p.Quality, p.Type, p.Culture, p.AreaOfUsage}).ToListAsync();
+                
                 return Json(products, JsonRequestBehavior.AllowGet);
             }            
         }

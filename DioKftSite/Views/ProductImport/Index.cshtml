@@ -1,9 +1,9 @@
 ﻿@{ 
     var hasMessage = !string.IsNullOrEmpty(ViewBag.Error);
 }
-<h2>@Resources.Resources.Import</h2>
-
 <div class="container">
+    <h2>@Resources.Resources.Import</h2>
+    <div id="loading"><i class="fa fa-refresh fa-spin"></i></div>
     @using (Html.BeginForm("UploadCsv", "ProductImport", FormMethod.Post, htmlAttributes: new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="@Resources.Resources.Upload" class="btn btn-default" />
+                    <input type="submit" value="@Resources.Resources.Upload" class="btn btn-default" onclick="$('#loading').show();"/>
                 </div>
             </div>
         </div>
