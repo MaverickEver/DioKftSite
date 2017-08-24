@@ -72,6 +72,7 @@ iframe.youtube-video-edit {
 }
 
 .btn-authentication {
+    display:none !important; /*Button is disable based on the customer comments.*/
     background-color: #125027;
     border-radius: 0px;
     color: white;

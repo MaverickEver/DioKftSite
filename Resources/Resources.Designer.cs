@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vegyianyagok.
+        ///   Looks up a localized string similar to Vegyi anyag.
         /// </summary>
         public static string Chemicals {
             get {
@@ -165,6 +165,15 @@ namespace Resources {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email beállítások.
+        /// </summary>
+        public static string EmailSettings {
+            get {
+                return ResourceManager.GetString("EmailSettings", resourceCulture);
             }
         }
         
@@ -277,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Növényvédő szerek.
+        ///   Looks up a localized string similar to Növényvédő szer.
         /// </summary>
         public static string Pesticides {
             get {
@@ -340,7 +349,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vetőmagok.
+        ///   Looks up a localized string similar to Vetőmag.
         /// </summary>
         public static string Seeds {
             get {

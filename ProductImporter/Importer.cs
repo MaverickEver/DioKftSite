@@ -28,7 +28,7 @@ namespace MS.WebSolutions.DioKft.ProductImporter
 
         public string ExecuteImportLogic(string filePath)
         {
-            var fileContent = File.ReadAllText(filePath);
+            var fileContent = File.ReadAllText(filePath,Encoding.UTF8);
 
             var rows = fileContent.Split('\n').Skip(1);
             var missedRows = new StringBuilder();

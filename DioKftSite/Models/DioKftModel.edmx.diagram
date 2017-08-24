@@ -19,6 +19,7 @@
         <AssociationConnector Association="DioKftModel.FK_News_NewsCategories" ManuallyRouted="false" />
         <AssociationConnector Association="DioKftModel.FK_Photos_PhotoCategories" ManuallyRouted="false" />
         <AssociationConnector Association="DioKftModel.FK_dbo_Products_dbo_Units_UnitId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DioKftModel.WebSiteConfiguration" Width="1.5" PointX="10.5" PointY="3.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

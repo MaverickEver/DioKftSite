@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace DioKftSite.Helpers
 {
@@ -15,7 +16,18 @@ namespace DioKftSite.Helpers
 
             return !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(id);
         }
-    }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
+            {            
+                var route = new RouteValueDictionary(new { controller = "Login", action = "Index" });
+                filterContext.Result = new RedirectToRouteResult(route);
+            }
+
+        }
+    }    
+
 
     public enum SessionItems
     {

@@ -133,7 +133,7 @@
     <value>Galéria Kategóriák</value>
   </data>
   <data name="Chemicals" xml:space="preserve">
-    <value>Vegyianyagok</value>
+    <value>Vegyi anyag</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kapcsolatok</value>
@@ -155,6 +155,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Szerkesztés</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Email beállítások</value>
   </data>
   <data name="EmptyProductTable" xml:space="preserve">
     <value>Válasszon kategóriát a termékek megjelenítéséhez.</value>
@@ -193,7 +196,7 @@
     <value>Bővebben...</value>
   </data>
   <data name="Pesticides" xml:space="preserve">
-    <value>Növényvédő szerek</value>
+    <value>Növényvédő szer</value>
   </data>
   <data name="PlaceOfOrigin" xml:space="preserve">
     <value>Származási hely</value>
@@ -214,7 +217,7 @@
     <value>Mennyiség</value>
   </data>
   <data name="Seeds" xml:space="preserve">
-    <value>Vetőmagok</value>
+    <value>Vetőmag</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Szolgáltatások</value>

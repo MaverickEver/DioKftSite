@@ -1,5 +1,8 @@
 ﻿@model DioKftSite.Models.ViewModels.ContactViewModel
 
+@{
+    var hasMessage = !string.IsNullOrEmpty(ViewBag.Message);
+}
 
 <style type="text/css">
     #contactPage {
@@ -25,10 +28,15 @@
             background-color: grey;
         }
 
+        #contactPage #inputSubject {
+            max-width: 400px !important;
+        }
+
         #contactPage #inputMessage {
             width: 100%;
             height: 100%;
             max-width: 400px !important;
+            max-height: 240px !important;
             border: 0;
             background-color: #e6e6e6;
             padding: 6px;
@@ -118,17 +126,26 @@
                 @Html.TextBoxFor(m => m.Email.Name, new { @type = "text", @class = "email-field", @id = "inputName", @placeholder = "Név..." })
                 @Html.TextBoxFor(m => m.Email.CompanyName, new { @type = "text", @class = "email-field", @id = "inputCompanyName", @placeholder = "Cég név..." })
                 @Html.TextBoxFor(m => m.Email.EmailAddress, new { @type = "email", @class = "email-field", @id = "inputEmailAdress", @placeholder = "E-mail cím ..." })
-                @Html.TextBoxFor(m => m.Email.PhoneNumber, new { @type = "tel", @class = "email-field", @id = "inputPhoneNumber", @placeholder = "Telefonszám..." })
-                <button type="submit" class="btn disabled">Küldés</button>
+                @Html.TextBoxFor(m => m.Email.PhoneNumber, new { @type = "tel", @class = "email-field", @id = "inputPhoneNumber", @placeholder = "Telefonszám..." })                
+                <button type="submit" class="btn">Küldés</button>
             </div>
 
             <div class="col-md-4">
-                @Html.TextAreaFor(m => m.Email.Message, 14, 55, new { @type = "text", @class = "email-field", @id = "inputMessage", @placeholder = "Üzenet ..." })
+                @Html.TextBoxFor(m => m.Email.Subject, new { @type = "text", @class = "email-field", @id = "inputSubject", @placeholder = "Tárgy..." })
+                @Html.TextAreaFor(m => m.Email.Message, 11, 55, new { @type = "text", @class = "email-field", @id = "inputMessage", @placeholder = "Üzenet ..." })
             </div>
 
             <div class="col-md-5">
                 <div id="map"></div>
             </div>
+        </div>
+    }
+
+    @if (hasMessage)
+    {
+        <br>
+        <div class="alert alert-info">
+            <strong>Info!</strong> @ViewBag.Message
         </div>
     }
 

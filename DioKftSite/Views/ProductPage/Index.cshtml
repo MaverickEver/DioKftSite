@@ -95,7 +95,10 @@
     var addToProductCart = function (id) {
         var quantity = $('#quantity' + id).val();
 
-        if (quantity == 0 || !$.isNumeric(quantity)) { alert("Kérem adjon meg egy nullánál nagyobb egész számot."); }
+        if (quantity == 0 || !$.isNumeric(quantity)) {            
+            alert("Kérem adjon meg egy nullánál nagyobb egész számot.");
+            return;
+        }
 
         $.getJSON('@Url.Action("AddProdutToCart")', { productId: id, quantity: quantity }, drawShoppingCart);
     }
@@ -105,6 +108,8 @@
     }
 
     var drawShoppingCart = function (shoppingCartItems) {
+        $("#loading").hide();
+
         var shoppingCart = $('#shoppingCartBody');
         shoppingCart.html('');
 

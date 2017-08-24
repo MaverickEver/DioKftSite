@@ -34,5 +34,6 @@ namespace DioKftSite.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<WebSiteConfiguration> WebSiteConfigurations { get; set; }
     }
 }

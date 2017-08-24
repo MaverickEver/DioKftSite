@@ -7,6 +7,10 @@ using DioKftSite.Models;
 using System.Net.Mail;
 using DioSiteKft.Models;
 using System.Text;
+using System.Net;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System.Threading.Tasks;
 
 namespace DioKftSite.Controllers.PublicPageControllers
 {
@@ -15,6 +19,12 @@ namespace DioKftSite.Controllers.PublicPageControllers
         // GET: ContactPage
         public ActionResult Index()
         {
+            var viewModel = BuildViewModel();
+            return View(viewModel);
+        }
+
+        private ContactViewModel BuildViewModel()
+        {
             var viewModel = new ContactViewModel { Contacts = this.GetAllContacts() };
 
             var shoppingCart = (this.Session[ProductPageController.SHOPPING_CART] as Dictionary<string, OrderItem>)?.Values?.ToList() ?? new List<OrderItem>();
@@ -22,7 +32,7 @@ namespace DioKftSite.Controllers.PublicPageControllers
             {
                 var stringBuilder = new StringBuilder();
 
-                stringBuilder.AppendLine($"Megrendelt tételek: ");
+                stringBuilder.AppendLine($"Ajánlatkérés a következő tétel(ek)re: ");
 
                 foreach (var item in shoppingCart)
                 {
@@ -31,24 +41,28 @@ namespace DioKftSite.Controllers.PublicPageControllers
 
                 viewModel.Email.Message = stringBuilder.ToString();
             }
-            return View(viewModel);
+
+            return viewModel;
         }
 
         [HttpPost]
         public ActionResult SendEmail(Email email)
         {
-            MailMessage message = CreateEmailMessage(email);
-
             try
             {
-                SendEmailMessage(message);
+                var message = CreateEmailMessage(email);
+
+                this.SendEmailMessage(message);
+                
             }
             catch (Exception ex)
             {
                 return Json("A problem has occured during contacting us. Please try it again! Exception: " + ex.Message);
             }
 
-            return Json("Email has been sent.");
+            ViewBag.Message = "Az email sikeresen elküldve.";
+            var viewModel = BuildViewModel();
+            return View("Index", viewModel);
         }
 
         private IEnumerable<Contact> GetAllContacts()
@@ -72,23 +86,33 @@ namespace DioKftSite.Controllers.PublicPageControllers
             return contactList;
         }
 
-        private void SendEmailMessage(MailMessage message)
+        private void SendEmailMessage(SendGridMessage message)
         {
-            using (var smtp = new SmtpClient())
+#if Debug
+            var apiKey = "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";
+#else
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+#endif
+
+            var client = new SendGridClient(apiKey);
+            client.SendEmailAsync(message).Wait();                                 
+        }
+
+        private string FetchSettingsValueFromDatabase(string name)
+        {
+            using (var databaseContext = new DioKftEntities())
             {
-                smtp.Send(message);
+               return databaseContext.WebSiteConfigurations.Where(c => c.Name == name).FirstOrDefault()?.Value;
             }
         }
 
-        private static MailMessage CreateEmailMessage(Email newEmail)
+        private SendGridMessage CreateEmailMessage(Email newEmail)
         {
-            var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-            var message = new MailMessage();
-            message.To.Add(new MailAddress("sapi.mihaly@gmail.com"));
-            message.From = new MailAddress(newEmail.EmailAddress);
-            message.Subject = "New Request from diokft.hu website.";
-            message.Body = string.Format(body, newEmail.Name, newEmail.EmailAddress, newEmail.Message);
-            message.IsBodyHtml = true;
+            var from = new EmailAddress(newEmail.EmailAddress);
+            var to = new EmailAddress(FetchSettingsValueFromDatabase("Email"));
+            var htmlContent = $"<p>Email From: {newEmail.Name} ({newEmail.EmailAddress})</p><p>Message:</p><p>{newEmail.Message}</p>";
+
+            var message = MailHelper.CreateSingleEmail(from, to, newEmail.Subject, string.Empty, htmlContent);
             return message;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using DioKftSite.Models;
+using SpreadsheetLight;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -37,9 +38,9 @@ namespace DioKftSite.Helpers
 
         public async Task<string> ExecuteImportLogicAsync(Stream inputStream, bool forceClear)
         {
-            if (forceClear) { await this.ClearDatabaseAsync(); }            
+            if (forceClear) { await this.ClearDatabaseAsync(); }
 
-            var fileContent = new StreamReader(inputStream, Encoding.UTF8, true).ReadToEnd();
+            var fileContent = this.ExcelStreamToString(inputStream);
 
             var messageQue = new StringBuilder();
             var rows = fileContent.Split(LINE_END);
@@ -61,6 +62,26 @@ namespace DioKftSite.Helpers
             }
 
             return messageQue.ToString().Trim();
+        }
+
+        private string ExcelStreamToString(Stream inputStream)
+        {
+            using (var excelFile = new SLDocument(inputStream,"Sheet1"))
+            {
+                var builder = new StringBuilder();                
+                foreach (var row in excelFile.GetCells())
+                {
+                    for (var i = 1; i <= columns.Length; i++)
+                    {
+                        builder.Append($"{excelFile.GetCellValueAsString(row.Key, i) ?? string.Empty}\t");
+                    }
+
+                    builder.Remove(builder.Length - 1, 1);
+                    builder.AppendLine();
+                }
+
+                return builder.ToString();
+            }
         }
 
         private async Task InitializeDatabaseAsync(IEnumerable<string> rows, StringBuilder errorMessage)

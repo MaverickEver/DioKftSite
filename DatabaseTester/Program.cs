@@ -1,4 +1,5 @@
 ﻿
+using MS.WebSolutions.DioKft.ProductImporter;
 using System;
 
 namespace MS.WebSolutions.DioKft.DatabaseTester
